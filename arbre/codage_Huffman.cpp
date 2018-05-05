@@ -263,26 +263,6 @@ void decoder(arbre a, char s[]){
 }
 
 
-/* 
-	une autre fonction pour afficher le caractere
-	correspendant au chemin s dans l'arbre a
-*/
-void decoderChemin(arbre a, char s[]){
-	
-	arbre courant =a;
-	while(strlen(s)>0){
-		if(s[0]=='0'){
-			courant = courant->fg;
-		}
-		if(s[0]=='1'){
-			courant = courant->fd;
-		}
-		s++;
-	}
-	printf("%c",courant->c);
-	
-}
-
 
 
 //afficher le menu principal
@@ -341,9 +321,30 @@ void myGarbageCollector(arbre a,liste l){
 	netoyerArbre(a);
 	netoyerArbre(l);
 	netoyerBlock(codage);
-	codage = NULL;
+	codage = NULL ;
 }
 
+
+//une maniere récursive pour coder une lettre
+int trouver_coder(arbre a,char ch, int tab[] , int n){
+	if(a->c == ch){
+		//on a trouve le charactere cherché, donc on affiche le chemin
+		for(int i=0 ; i<n ; i++){
+			printf("%d",tab[i]);
+		}
+		return 1;
+	}else if(a->c != '#'){
+		//on a arrivé a la fin de l'arbre
+		return 0;
+	}else{
+		tab[n] = 0 ;
+		n++ ;
+		if(!trouver_coder(a->fg,ch,tab,n)){
+			tab[n-1] = 1 ;
+			trouver_coder(a->fd,ch,tab,n);
+		}
+	}
+}
 
 
 
@@ -420,3 +421,4 @@ int main() {
 		}
 	}
 }
+

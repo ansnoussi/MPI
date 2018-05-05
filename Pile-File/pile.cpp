@@ -105,6 +105,16 @@ void diviserPile(Pile p,Pile* p1,Pile* p2){
 	}
 }
 
+//inverser recursivement une pile
+void inverserRecusive(Pile p1 , Pile* p2){
+	if(pileEstVide(p1)){
+		return ;
+	}
+	*p2 = Empiler(*p2, getPileTete(p1));
+	p1 = Depiler(p1);
+	inverserRecusive(p1,p2);
+}
+
 //inverser l'ordre des elements d'une pile
 
 Pile inverserPile(Pile p){
@@ -153,8 +163,8 @@ int main() {
 	p = Empiler(p , 2);
 	p = Empiler(p , 12);
 	afficherPile(&p);
-	afficherPile(&p);
-	afficherPile(&p);
-	afficherPile(&p);
+	Pile pInv = creePileVide();
+	inverserRecusive(p,&pInv);
+	afficherPile(&pInv);
 	
 }

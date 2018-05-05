@@ -87,6 +87,16 @@ void afficherFile(file* f){
 	
 }
 
+void inverserFile(file *f){
+	if(fileEstVide(*f)){
+		return ;
+	}
+	int aux = getFileTete(*f);
+	*f = Defiler(*f);
+	inverserFile(f);
+	*f = Enfiler(*f,aux);
+}
+
 int main() {
 	file f = creeFileVide();
 	f = Enfiler(f, 20);
@@ -100,6 +110,7 @@ int main() {
 	printf("\n");
 	printf("longeur file: %d \n",longeurFile(&f));
 	afficherFile(&f);
+	inverserFile(&f);
 	printf("\n");
 	afficherFile(&f);
 }
