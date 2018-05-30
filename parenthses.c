@@ -23,6 +23,7 @@ char wrong(char * s){
 	}
 }
 
+//tester si une expression arethmitique est valide ou non
 int main(){
 	printf("donner une expression arithmetique: ");
 	char  string[100];
